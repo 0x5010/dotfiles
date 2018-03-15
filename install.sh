@@ -1,4 +1,7 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -eu
+set -o pipefail
 
 DOTFILESDIRECTORY=$(pwd)
 
@@ -26,15 +29,28 @@ check_os() {
     fi
 }
 
-backup_dotfiles() {
+function backup() {
+    local source=$1
     backupdir="$DOTFILESDIRECTORY/backup"
-    mv ~/.zshrc $backupdir
-    mv ~/.vimrc $backupdir
-    mv ~/.vimrc.local $backupdir
-    mv ~/.vimrc.bundles $backupdir
-    mv ~/.vimrc.bundles.local $backupdir
-    mv ~/.gitconfig $backupdir
-    mv ~/.gitignore_global $backupdir
+    if [ -f $source ]; then
+        if [ -L $source ]; then
+            rm $source
+        else
+            echo "backup $source to $backupdir"
+            mv -f $source $backupdir
+        fi
+    fi
+}
+
+backup_dotfiles() {
+    backup ~/.zshrc
+    backup ~/.vimrc
+    backup ~/.vimrc.local
+    backup ~/.vimrc.bundles
+    backup ~/.vimrc.bundles.local
+    backup ~/.gitconfig
+    backup ~/.gitignore_global
+    backup ~/.pip/pip.conf
     
     echo "backup done"
 }
@@ -47,6 +63,11 @@ update_dotfiles() {
     ln -s "$DOTFILESDIRECTORY/vim/vimrc.bundles.local" ~/.vimrc.bundles.local
     ln -s "$DOTFILESDIRECTORY/git/gitconfig" ~/.gitconfig
     ln -s "$DOTFILESDIRECTORY/git/gitignore_global" ~/.gitignore_global
+    if [ ! -d ~/.pip ]; then
+        mkdir ~/.pip
+    fi
+    ln -s "$DOTFILESDIRECTORY/python/pip.conf" ~/.pip/pip.conf
+
 
     echo "update done"
 }
