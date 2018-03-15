@@ -1,0 +1,17 @@
+[core]
+	excludesfile = ~/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = 0x5010
+	email = 0xh4cker@gmail.com
+[includeIf "gitdir:~/project/"]
+    path = ~/project/.gitconfig
+
+[commit]
+    template = ~/.stCommitMsg
+
