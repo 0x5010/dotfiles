@@ -29,9 +29,17 @@
     vimcompatible = true
 
     default_indent = 4
+    enable_vimfiler_gitstatus = true
+    python_host_prog = '/usr/bin/python'
+    python3_host_prog = '/Users/linyifan/.pyenv/versions/3.6.0/bin/python3'
 
 [[custom_plugins]]
 name = 'iCyMind/NeoSolarized'
+merged = 0
+
+[[custom_plugins]]
+name = "lilydjwg/colorizer"
+on_cmd = ["ColorHighlight", "ColorToggle"]
 merged = 0
 
 # Enable autocomplete layer
