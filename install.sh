@@ -51,6 +51,8 @@ backup_dotfiles() {
     backup ~/.gitconfig
     backup ~/.gitignore_global
     backup ~/.pip/pip.conf
+    backup ~/.config/nvim/init.vim
+    backup ~/.SpaceVim.d/init.toml
     
     echo "backup done"
 }
@@ -61,6 +63,8 @@ update_dotfiles() {
     ln -s "$DOTFILESDIRECTORY/vim/vimrc.local" ~/.vimrc.local
     ln -s "$DOTFILESDIRECTORY/vim/vimrc.bundles" ~/.vimrc.bundles
     ln -s "$DOTFILESDIRECTORY/vim/vimrc.bundles.local" ~/.vimrc.bundles.local
+    ln -s "$DOTFILESDIRECTORY/neovim/init.vim" ~/.config/nvim/init.vim
+    ln -s "$DOTFILESDIRECTORY/spacevim/init.toml" ~/.SpaceVim.d/init.toml
     ln -s "$DOTFILESDIRECTORY/git/gitconfig" ~/.gitconfig
     ln -s "$DOTFILESDIRECTORY/git/gitignore_global" ~/.gitignore_global
     if [ ! -d ~/.pip ]; then
